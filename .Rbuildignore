@@ -5,6 +5,7 @@
 rebuild\.R
 rebuild\.Rmd
 rebuild_exports\.Rmd
+demo\.Rmd
 fui_conc\.Rmd
 ^\.gitignore$
 ^\.github/
