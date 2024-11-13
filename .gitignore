@@ -15,3 +15,5 @@ fui_conc.Rmd
 data/
 *rebuild.R
 *_conc.*
+demo_dk.Rmd
+demo_sb.Rmd
