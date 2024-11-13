@@ -59,7 +59,6 @@ unimm.fastFMM <- function(fmm, l) {
 #'
 #' @import lme4
 #' @importFrom stats as.formula model.matrix
-#' @importFrom Matrix colSums
 #' @export
 
 unimm.fastFMMconc <- function(fmm, l) {
@@ -101,7 +100,7 @@ unimm.fastFMMconc <- function(fmm, l) {
 
   # Z matrix and random effects table
   if (fmm$analytic) {
-    res$ztlist <- sapply(lme4::getME(fit_uni, "Ztlist"), Matrix::colSums)
+    res$ztlist <- sapply(lme4::getME(fit_uni, "Ztlist"), function(x) colSums(x))
     varcorr_df <- as.data.frame(lme4::VarCorr(fit_uni))
     res$varcorr_df <- varcorr_df[varcorr_df$grp != "Residual", 1:3]
     res$designmat <- stats::model.matrix(fit_uni)
