@@ -29,7 +29,8 @@ fui(
   non_neg = 0,
   MoM = 1,
   concurrent = FALSE,
-  impute_outcome = FALSE
+  impute_outcome = FALSE,
+  override_zero_var = FALSE
 )
 }
 \arguments{
@@ -107,12 +108,17 @@ average of coefficents for 1 variance term. Defaults to 0.}
 
 \item{MoM}{Method of moments estimator. Defaults to 1.}
 
-\item{concurrent}{Logical, indicating whether to fit a concurrent model.
+\item{concurrent}{Logical, indicates whether to fit a concurrent model.
 Defaults to \code{FALSE}.}
 
-\item{impute_outcome}{Logical, indicating whether to impute missing outcome
+\item{impute_outcome}{Logical, indicates whether to impute missing outcome
 values with FPCA. Defaults to \code{FALSE}. Use with caution as the
 downstream effects are not tested.}
+
+\item{override_zero_var}{Logical, indicates whether to proceed with model
+fitting if columns have zero variance. Suggested for cases where individual
+columns have zero variance but interactions have non-zero variance. Defaults
+to `FALSE`.}
 }
 \value{
 A list containing:

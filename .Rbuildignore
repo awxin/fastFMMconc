@@ -13,3 +13,5 @@ fui_conc\.Rmd
 ^.*\_conc\.*
 ^.*\-NOTES\.*
 ^data/
+demo_*\\.Rmd$
+demo_*\\.R
