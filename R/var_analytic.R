@@ -363,7 +363,7 @@ var_analytic <- function(
       betaTilde = mum$betaTilde,
       var_random = mum$var_random,
       designmat = mum$designmat,
-      residuals = mum$resids,
+      residuals = mum$residuals,
       H = HHat_trim,
       R = RHat,
       G = GTilde,
