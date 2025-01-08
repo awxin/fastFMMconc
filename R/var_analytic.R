@@ -326,8 +326,8 @@ var_analytic <- function(
   # Obtain qn to construct joint CI
   qn <- rep(0, length = nrow(betaHat))
   # Number of samples to estimate c in confidence intervals in simulation
-  # N <- 10000
-  N <- 100000 ## sample size in simulation-based approach
+  N <- 10000
+  # N <- 100000 ## sample size in simulation-based approach
   zero_vec <- rep(0, length(betaHat[1,]))
   set.seed(seed)
 

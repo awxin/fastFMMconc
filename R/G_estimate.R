@@ -42,7 +42,7 @@ G_estimate.fastFMM <- function(
   fmm, mum, betaHat, HHat, non_neg, MoM, silent
 ) {
   if(silent == FALSE)
-    print("Step 3.1.1: Method of Moments Covariance Estimator")
+    message("Step 3.1.1: Method of Moments Covariance Estimator")
 
   data <- fmm$data
   L <- length(fmm$argvals)
@@ -181,7 +181,7 @@ G_estimate.fastFMMconc <- function(
   fmm, mum, betaHat, HHat, non_neg, MoM, silent
 ) {
   if(silent == FALSE)
-    print("Step 3.1.1: Method of Moments Covariance Estimator")
+    message("Step 3.1.1: Method of Moments Covariance Estimator")
 
   # Dummy
   data <- fmm$data
@@ -290,7 +290,7 @@ cov_nnls <- function(
 
   if (non_neg == 1) {
 
-    if(silent == FALSE) print("Step 3.1.2: NNLS 1")
+    if(silent == FALSE) message("Step 3.1.2: NNLS 1")
 
     # put constraints on EVERY coef corresponding to columns for one random effect
     ncol_Z <- ncol(data_cov$Z)
@@ -320,7 +320,7 @@ cov_nnls <- function(
     }
 
   } else if(non_neg == 2) {
-    if(silent == FALSE) print("Step 3.1.2: NNLS 2")
+    if(silent == FALSE) message("Step 3.1.2: NNLS 2")
 
     # put constraints on AVERAGE over coefs corresponding to columns for one random effect
     ncol_Z <- ncol(data_cov$Z)
