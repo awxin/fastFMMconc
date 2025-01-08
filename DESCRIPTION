@@ -1,7 +1,7 @@
 Package: fastFMMconc
 Type: Package
 Title: Concurrent beta of fastFMM
-Version: 0.0.0
+Version: 0.0.1
 Date: 2024-08-26
 Authors@R: c(
     person("Erjia", "Cui", role = c("aut", "cre"), email = "ecui@umn.edu"),
