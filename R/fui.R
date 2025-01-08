@@ -321,14 +321,14 @@ fui <- function(
   # 1. Massively univariate mixed models #######################################
 
   if (!silent)
-    print("Step 1: Fit Massively Univariate Mixed Models")
+    message("Step 1: Fit Massively Univariate Mixed Models")
 
   # Create a list of univariate models ("massively univariate")
   mum <- massmm(fmm, parallel, n_cores)
 
   # 2. Smoothing ###############################################################
 
-  if (!silent) print("Step 2: Smoothing")
+  if (!silent) message("Step 2: Smoothing")
 
   # Penalized splines smoothing and extract components (analytic)
   # Number of knots for regression coefficients
@@ -441,7 +441,6 @@ fui <- function(
   # 3.1 Analytic inference #####################################################
 
   if (analytic) {
-    if (!silent) print("Step 3: Inference (Analytic)")
     var_res <- var_analytic(
       fmm,
       mum,
@@ -455,7 +454,6 @@ fui <- function(
       silent
     )
   } else {
-    if (!silent) print("Step 3: Inference (Bootstrap)")
     var_res <- var_bootstrap(mum)
   }
 

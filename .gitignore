@@ -6,7 +6,7 @@
 *NOTES.R
 *.Rproj
 rebuild.Rmd
-demo.*
+demo*
 *oop.R
 data/
 rebuild.R
