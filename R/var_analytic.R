@@ -328,7 +328,7 @@ var_analytic <- function(
   # Number of samples to estimate c in confidence intervals in simulation
   N <- 10000
   # N <- 100000 ## sample size in simulation-based approach
-  zero_vec <- rep(0, length(betaHat[1,]))
+  zero_vec <- rep(0, length(betaHat[1, ]))
   set.seed(seed)
 
   for(i in 1:length(qn)) {
@@ -342,6 +342,22 @@ var_analytic <- function(
     qn[i] <- stats::quantile(un, 0.95)
   }
 
+  # # Alternate approach: t-distribution assumption instead of Normal
+  # if (!silent)
+  #   message("Assuming a t-distribution for confidence intervals.")
+  # AX: add as option later
+  
+  for (i in 1:length(qn)) {
+    Sigma <- betaHat_var[, , i]
+    sqrt_Sigma <- sqrt(diag(Sigma))
+    S_scl <- Matrix::Diagonal(x = 1 / sqrt_Sigma)
+    Sigma <- as.matrix(S_scl %*% Sigma %*% S_scl)
+    # x_sample <- abs(FastGP::rcpp_rmvnorm_stable(N, Sigma, zero_vec))
+    x_sample <- abs(mvtnorm::rmvnorm(N, zero_vec, Sigma))
+    un <- Rfast::rowMaxs(x_sample, value = TRUE)
+    qn[i] <- stats::quantile(un, 0.95)
+  }
+  
   # Decide whether to return design matrix or just set it to NULL
   # if (!design_mat) designmat <- NA
   if (!silent)
