@@ -209,8 +209,11 @@ G_estimate.fastFMMconc <- function(
     for(j in i:L){
       YYj <- YYi * (d_temp[, j] - designmat[[j]] %*% betaHat[, j]) # outcome of product of residuals
       data_cov <- G_generate(fmm, mum, i, j)
-      XTXX <- as.matrix(tcrossprod(MASS::ginv(as.matrix(crossprod(data_cov$Z))), data_cov$Z))
-
+      # browser()
+      # XTXX <- as.matrix(tcrossprod(MASS::ginv(as.matrix(crossprod(data_cov$Z))), data_cov$Z))
+      # AX: Test for numerical problems with generalized inverse
+      XTXX <- as.matrix(solve(as.matrix(crossprod(data_cov$Z)), t(data_cov$Z)))
+      
       bHat <- XTXX %*% YYj  # coefficients from OLS with pseudo-inverse
       GTilde[, i, j] <- GTilde[, j, i] <- sapply(
         idx_lst, function(x) mean(bHat[x])

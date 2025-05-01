@@ -88,6 +88,7 @@ var_parallel.fastFMM <- function(
 
     # Rfast provides a faster matrix inversion
     V_subj_inv <- as.matrix(Rfast::spdinv(V_subj))
+    # V_subj_inv <- as.matrix(solve(V_subj))
 
     XTVinvX <- XTVinvX +
       crossprod(matrix(designmat[subj_ind,], ncol = p), V_subj_inv) %*%
@@ -187,7 +188,9 @@ var_parallel.fastFMMconc <- function(
     }
 
     # Rfast provides a faster matrix inversion
-    V_subj_inv <- as.matrix(Rfast::spdinv(V_subj))
+    # AX: Test for numerical problems with spdinv
+    # V_subj_inv <- as.matrix(Rfast::spdinv(V_subj))
+    V_subj_inv <- as.matrix(solve(V_subj))
 
     XTVinvX <- XTVinvX +
       crossprod(matrix(designmat[subj_ind,], ncol = p), V_subj_inv) %*%
@@ -205,8 +208,10 @@ var_parallel.fastFMMconc <- function(
       ) %*% Z[subj_ind, , drop = FALSE]
     }
   }
-
-  betaTilde_theo_var_s <- as.matrix(Rfast::spdinv(XTVinvX))
+  
+  # AX: Test for numerical problems with spdinv
+  betaTilde_theo_var_s <- as.matrix(solve(XTVinvX))
+  # betaTilde_theo_var_s <- as.matrix(Rfast::spdinv(XTVinvX))
 
   return(
     list(

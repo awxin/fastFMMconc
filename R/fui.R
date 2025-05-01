@@ -76,6 +76,8 @@
 #' fitting if columns have zero variance. Suggested for cases where individual
 #' columns have zero variance but interactions have non-zero variance. Defaults
 #' to `FALSE`.
+#' @param unsmooth Logical, indicates whether to return the raw estimates of
+#' coefficients and variances without smoothing. Defaults to `FALSE`.
 #'
 #' @return A list containing:
 #' \item{betaHat}{Estimated functional fixed effects}
@@ -144,7 +146,8 @@ fui <- function(
   MoM = 1,
   concurrent = FALSE,
   impute_outcome = FALSE,
-  override_zero_var = FALSE
+  override_zero_var = FALSE, 
+  unsmooth = FALSE
 ) {
 
   # 0. Setup ###################################################################
@@ -396,7 +399,8 @@ fui <- function(
     )
   }
   rownames(betaHat) <- rownames(betaTilde)
-  rm(betaTilde)
+  # Discard the original estimates if not asked for
+  if (!unsmooth) rm(betaTilde)
   colnames(betaHat) <- 1:L
 
   # Save a convenient list to pass to variance calculation
@@ -411,6 +415,15 @@ fui <- function(
   # 3. Variance estimation #####################################################
 
   # 3.0 Early return ===========================================================
+  
+  res <- list(
+    betaHat = smoothed$betaHat,
+    HHat = smoothed$HHat,
+    argvals = argvals,
+    aic = mum$AIC_mat
+  )
+
+  if (unsmooth) res$betaTilde <- betaTilde
 
   # End the function call if no variance calculation is required
   if (!var) {
@@ -423,16 +436,7 @@ fui <- function(
         )
       )
     }
-    # AX: Add additional return of smoothed HHat
-
-    return(
-      list(
-        betaHat = smoothed$betaHat,
-        HHat = smoothed$HHat,
-        argvals = argvals,
-        aic = mum$AIC_mat
-        )
-      )
+    return(res)
   }
 
   # At this point, the function either chooses analytic or bootstrap inference
@@ -459,6 +463,7 @@ fui <- function(
 
   # AX: Can't really remove this at any other point
   if (!design_mat) var_res$designmat <- NULL
+  if (unsmooth) var_res$betaTilde <- betaTilde
 
   return(var_res)
 }

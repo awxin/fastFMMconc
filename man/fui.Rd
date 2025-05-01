@@ -30,7 +30,8 @@ fui(
   MoM = 1,
   concurrent = FALSE,
   impute_outcome = FALSE,
-  override_zero_var = FALSE
+  override_zero_var = FALSE,
+  unsmooth = FALSE
 )
 }
 \arguments{
@@ -119,6 +120,9 @@ downstream effects are not tested.}
 fitting if columns have zero variance. Suggested for cases where individual
 columns have zero variance but interactions have non-zero variance. Defaults
 to `FALSE`.}
+
+\item{unsmooth}{Logical, indicates whether to return the raw estimates of
+coefficients and variances without smoothing. Defaults to `FALSE`.}
 }
 \value{
 A list containing:
