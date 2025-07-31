@@ -19,7 +19,7 @@ fui(
   splines = "tp",
   design_mat = FALSE,
   residuals = FALSE,
-  num_boots = 500,
+  n_boots = 500,
   boot_type = NULL,
   seed = 1,
   subj_id = NULL,
@@ -82,7 +82,7 @@ Defaults to \code{FALSE}}
 \item{residuals}{Logical, indicating whether to save residuals from
 unsmoothed LME. Defaults to \code{FALSE}.}
 
-\item{num_boots}{Number of samples when using bootstrap inference. Defaults
+\item{n_boots}{Number of samples when using bootstrap inference. Defaults
 to 500.}
 
 \item{boot_type}{Bootstrap type (character): "cluster", "case", "wild",

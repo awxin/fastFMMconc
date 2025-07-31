@@ -347,14 +347,6 @@ var_analytic <- function(
   #   message("Assuming a t-distribution for confidence intervals.")
   # AX: add as option later
   
-  # Decide whether to return design matrix or just set it to NULL
-  # if (!design_mat) designmat <- NA
-  if (!silent)
-    message(
-      "Complete!", "\n",
-      " - Use plot_fui() function to plot estimates.", "\n",
-      " - For more information, run the command:  ?plot_fui"
-    )
 
   return(
     list(
